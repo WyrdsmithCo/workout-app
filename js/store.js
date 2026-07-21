@@ -28,6 +28,7 @@ function fresh() {
     total: 0,           // lifetime workouts banked
     weeksDone: 0,       // lifetime weeks completed
     history: [],        // [{ ts, phase, week, day, title }]
+    weightLog: [],      // [{ ts, exercise, weight }] — one entry per logged weight
     settings: { units: 'lb', sound: true },
     profile: {
       name: 'Chelsea',

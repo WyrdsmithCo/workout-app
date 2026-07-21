@@ -193,7 +193,17 @@ function strengthRow(it, id) {
   row.appendChild(t); row.appendChild(why);
   return row;
 }
-function saveWt(k, val) { const n = parseFloat(val); state.weights[k] = isNaN(n) ? null : n; save(); renderDay(); }
+function saveWt(k, val) {
+  const n = parseFloat(val);
+  state.weights[k] = isNaN(n) ? null : n;
+  if (!isNaN(n) && n > 0) {
+    // record a dated entry so the Progress page can chart it over time
+    const exercise = k.replace(/^w:/, '');
+    state.weightLog.push({ ts: Date.now(), exercise, weight: n });
+  }
+  save();
+  renderDay();
+}
 
 function toggle(id) {
   state.checks[id] = !state.checks[id];
