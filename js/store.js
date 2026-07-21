@@ -29,6 +29,7 @@ function fresh() {
     weeksDone: 0,       // lifetime weeks completed
     history: [],        // [{ ts, phase, week, day, title }]
     weightLog: [],      // [{ ts, exercise, weight }] — one entry per logged weight
+    weighIns: [],       // [{ ts, weight }] — bodyweight over time
     settings: { units: 'lb', sound: true },
     profile: {
       name: 'Chelsea',
