@@ -219,3 +219,43 @@ table.data td b{font-family:'Space Grotesk',sans-serif;color:var(--fire-2);}
 .kt-burst{position:fixed;pointer-events:none;z-index:90;}
 .kt-particle{position:absolute;width:9px;height:9px;border-radius:2px;}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+/* ============================================================
+   iPhone responsiveness (added block — overrides above)
+   ============================================================ */
+
+/* Stop iOS zooming when you tap a number field: inputs must be >=16px */
+.kt-wt input, input, textarea, select { font-size: 16px; }
+
+/* Bigger tap targets for the weight steppers */
+.kt-wt .kt-step { width: 34px; height: 34px; }
+.kt-wt input { width: 70px; height: 34px; }
+
+/* No grey flash when tapping on iOS */
+a, button, .kt-tab, .kw-day, .kt-box { -webkit-tap-highlight-color: transparent; }
+
+/* Use the real (dynamic) viewport height so Safari's toolbar doesn't cover things */
+.app { min-height: 100dvh; }
+
+/* Float the rest timer above the home-indicator bar */
+.kt-timer { bottom: calc(16px + env(safe-area-inset-bottom)); }
+
+/* Phones: keep content clear of the notch + home indicator */
+@media (max-width: 720px) {
+  .sidebar { padding: calc(12px + env(safe-area-inset-top)) 12px 12px; }
+  .view { padding: 20px 16px calc(90px + env(safe-area-inset-bottom)); }
+  .nav a { padding: 10px 13px; }
+  .page-head h1 { font-size: 1.45rem; }
+}
+
+/* Small phones (iPhone SE / mini, ~320–375px): shrink so 4 tabs still fit */
+@media (max-width: 380px) {
+  .view { padding-left: 12px; padding-right: 12px; }
+  .kt-tabs { gap: 5px; }
+  .kt-tab { padding: 9px 2px; }
+  .kt-tab .d { font-size: 0.88rem; }
+  .kt-tab .f { font-size: 0.54rem; }
+  .kt-phasebtn { padding: 10px; }
+  .grid2 { gap: 8px; }
+  .kt-title { font-size: 1.35rem; }
+}
