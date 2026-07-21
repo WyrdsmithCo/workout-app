@@ -24,5 +24,9 @@ createRouter({
   view,
   routes,
   fallback: 'home',
-  onRoute: (name) => renderNav(nav, name),
+  onRoute: (name) => {
+    renderNav(nav, name);
+    const t = document.getElementById('navToggle');
+    if (t) t.checked = false; // close the mobile menu after navigating
+  },
 });

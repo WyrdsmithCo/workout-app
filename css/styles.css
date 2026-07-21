@@ -221,34 +221,57 @@ table.data td b{font-family:'Space Grotesk',sans-serif;color:var(--fire-2);}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 
 /* ============================================================
-   iPhone responsiveness (added block — overrides above)
+   Mobile: hamburger nav + responsiveness + full background
+   (added block — overrides everything above)
    ============================================================ */
 
-/* Stop iOS zooming when you tap a number field: inputs must be >=16px */
-.kt-wt input, input, textarea, select { font-size: 16px; }
+/* --- Background: cover the whole screen, never repeat --- */
+html { background: var(--ink); }
+body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;   /* pins the gradient to the viewport */
+  background-size: cover;
+}
 
-/* Bigger tap targets for the weight steppers */
-.kt-wt .kt-step { width: 34px; height: 34px; }
-.kt-wt input { width: 70px; height: 34px; }
+/* --- Global guards so nothing spills sideways --- */
+html, body { max-width: 100%; overflow-x: hidden; }
+.view { width: 100%; }
+.card, .stub { overflow-wrap: break-word; }
 
-/* No grey flash when tapping on iOS */
+/* --- iOS niceties --- */
+.kt-wt input, input, textarea, select { font-size: 16px; } /* stops tap-zoom */
 a, button, .kt-tab, .kw-day, .kt-box { -webkit-tap-highlight-color: transparent; }
-
-/* Use the real (dynamic) viewport height so Safari's toolbar doesn't cover things */
 .app { min-height: 100dvh; }
-
-/* Float the rest timer above the home-indicator bar */
 .kt-timer { bottom: calc(16px + env(safe-area-inset-bottom)); }
 
-/* Phones: keep content clear of the notch + home indicator */
+/* --- Topbar + hamburger: hidden on desktop --- */
+.topbar { display: flex; align-items: center; justify-content: space-between; }
+.hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; cursor: pointer; }
+.hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .2s, opacity .2s; }
+
+/* ============ MOBILE (<= 720px) ============ */
 @media (max-width: 720px) {
-  .sidebar { padding: calc(12px + env(safe-area-inset-top)) 12px 12px; }
+  .app { grid-template-columns: 1fr; }               /* stack, no side column */
+  .sidebar {
+    position: sticky; top: 0; z-index: 30; height: auto;
+    padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+    gap: 0;
+  }
+  .hamburger { display: flex; }                       /* show the button */
+  .nav { display: none; }                             /* hide links by default */
+  #navToggle:checked ~ .nav {                          /* show them when open */
+    display: flex; flex-direction: column; gap: 4px; margin-top: 12px;
+  }
+  #navToggle:checked ~ .topbar .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #navToggle:checked ~ .topbar .hamburger span:nth-child(2) { opacity: 0; }
+  #navToggle:checked ~ .topbar .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav a { padding: 13px 12px; font-size: 1rem; }
+
   .view { padding: 20px 16px calc(90px + env(safe-area-inset-bottom)); }
-  .nav a { padding: 10px 13px; }
   .page-head h1 { font-size: 1.45rem; }
 }
 
-/* Small phones (iPhone SE / mini, ~320–375px): shrink so 4 tabs still fit */
+/* ============ SMALL PHONES (<= 380px) ============ */
 @media (max-width: 380px) {
   .view { padding-left: 12px; padding-right: 12px; }
   .kt-tabs { gap: 5px; }
