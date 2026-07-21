@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Momentum — Workout App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!--
+    The shell is intentionally tiny. Everything below is a mount point that
+    JS fills in. app.js boots the router, which swaps whatever page module
+    is active into <main id="view">. Nav is rendered once into <nav id="nav">.
+  -->
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Momentum</div>
+      <nav id="nav" class="nav" aria-label="Main"></nav>
+    </aside>
+    <main id="view" class="view" tabindex="-1"></main>
+  </div>
+
+  <!-- Shared UI the Today page drives. Kept in the shell so it floats above everything. -->
+  <div class="kt-timer" id="rest-timer" role="status" aria-live="polite">
+    <div><div class="tlabel" id="rest-label">Rest</div><div class="tnum" id="rest-num">0:00</div></div>
+    <div class="tctrls">
+      <button class="kt-tbtn" id="rest-minus">−15</button>
+      <button class="kt-tbtn" id="rest-plus">+15</button>
+      <button class="kt-tbtn skip" id="rest-skip">Done</button>
+    </div>
+  </div>
+
+  <div class="kt-modal" id="modal">
+    <div class="kt-modal-box">
+      <h3 id="modal-title"></h3>
+      <p id="modal-body"></p>
+      <div class="kt-modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+
+# dependencies (if you add a build step later)
+node_modules/
+dist/
+
+# logs
+*.log
